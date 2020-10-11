@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.wemedia.WmMaterialMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.wemedia.WmMaterial" >
+      <id column="id" />
+      <result column="user_id" />
+      <result column="url"/>
+      <result column="type"/>
+      <result column="is_collection"/>
+      <result column="created_time" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, user_id, url, type, is_collection, created_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from wm_material
+    where id = #{id}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from wm_material
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmMaterial" useGeneratedKeys="true" keyProperty="id">
+
+    insert into wm_material (user_id, url,
+      type, is_collection, created_time
+      )
+    values (#{userId}, #{url},
+      #{type}, #{isCollection}, #{createdTime}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmMaterial" >
+
+    update wm_material
+    set user_id = #{userId},
+      url = #{url},
+      type = #{type},
+      is_collection = #{isCollection},
+      created_time = #{createdTime}
+    where id = #{id}
+  </update>
+  <update id="updateStatusByUidAndId">
+    update wm_material
+    set is_collection = #{type}
+    where user_id = #{userId} and id = #{id}
+  </update>
+
+  <select id="findMaterialByUidAndimgUrls"
+          resultType="com.heima.article.mysql.core.model.pojos.wemedia.WmMaterial">
+    select id, url
+    from wm_material
+    where  user_id = #{uid}
+    and url in
+    <foreach item="item" index="index" collection="values"
+             open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </select>
+  <select id="findListByUidAndStatus" resultType="com.heima.article.mysql.core.model.pojos.wemedia.WmMaterial">
+    select
+    <include refid="Base_Column_List" />
+    from wm_material
+    where user_id = #{uid}
+    <if test="dto.isCollected == 1">
+      and is_collection = #{dto.isCollected}
+    </if>
+    limit ${(dto.page - 1) * dto.size}, ${dto.size}
+  </select>
+  <select id="countListByUidAndStatus" resultType="java.lang.Integer">
+    select
+    count(0)
+    from wm_material
+    where user_id = #{uid}
+    <if test="dto.isCollected == 1">
+      and is_collection = #{dto.isCollected}
+    </if>
+  </select>
+    <select id="findByIds" resultType="java.lang.String">
+      select url from wm_material
+      where id in
+      <foreach item="item" index="index" collection="list"
+               open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </select>
+</mapper>

@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.wemedia.WmNewsMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.wemedia.WmNews" >
+
+
+      <id column="id"  property="id"/>
+      <result column="user_id" property="userId"/>
+      <result column="title" property="title"/>
+      <result column="type" property="type"/>
+      <result column="channel_id" property="channelId"/>
+      <result column="labels" property="labels"/>
+      <result column="created_time" property="createdTime"/>
+      <result column="submited_time" property="submitedTime"/>
+      <result column="status" property="status"/>
+      <result column="publish_time" property="publishTime"/>
+      <result column="reason" property="reason"/>
+      <result column="article_id" property="articleId"/>
+
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.heima.article.mysql.core.model.pojos.wemedia.WmNews" >
+
+
+    <id column="id"  property="id"/>
+    <result column="user_id" property="userId"/>
+    <result column="title" property="title"/>
+    <result column="type" property="type"/>
+    <result column="channel_id" property="channelId"/>
+    <result column="labels" property="labels"/>
+    <result column="created_time" property="createdTime"/>
+    <result column="submited_time" property="submitedTime"/>
+    <result column="status" property="status"/>
+    <result column="publish_time" property="publishTime"/>
+    <result column="reason" property="reason"/>
+    <result column="article_id" property="articleId"/>      <result column="content" property="content" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+
+    id, user_id, title, type, channel_id, labels, created_time, submited_time, status, 
+    publish_time, reason, article_id, images
+  </sql>
+  <sql id="Blob_Column_List" >
+
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wm_news
+    where id = #{id}
+  </select>
+  <!--findbyNewsIdAndStatus-->
+  <select id="findbyNewsIdAndStatus" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wm_news
+    where id = #{newsId} and status = #{status}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wm_news
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from wm_news
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmNews" >
+
+    insert into wm_news (id, user_id, title, 
+      type, channel_id, labels, 
+      created_time, submited_time, status, 
+      publish_time, reason, article_id, 
+      content)
+    values (#{id}, #{userId}, #{title},
+      #{type}, #{channelId}, #{labels},
+      #{createdTime}, #{submitedTime}, #{status,jdbcType=TINYINT},
+      #{publishTime}, #{reason}, #{articleId},
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmNews" >
+
+    insert into wm_news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="labels != null" >
+        labels,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+      <if test="submitedTime != null" >
+        submited_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="publishTime != null" >
+        publish_time,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="articleId != null" >
+        article_id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="userId != null" >
+        #{userId},
+      </if>
+      <if test="title != null" >
+        #{title},
+      </if>
+      <if test="type != null" >
+        #{type},
+      </if>
+      <if test="channelId != null" >
+        #{channelId},
+      </if>
+      <if test="labels != null" >
+        #{labels},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+      <if test="submitedTime != null" >
+        #{submitedTime},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="publishTime != null" >
+        #{publishTime},
+      </if>
+      <if test="reason != null" >
+        #{reason},
+      </if>
+      <if test="articleId != null" >
+        #{articleId},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmNews" >
+
+    update wm_news
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId},
+      </if>
+      <if test="title != null" >
+        title = #{title},
+      </if>
+      <if test="type != null" >
+        type = #{type},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId},
+      </if>
+      <if test="labels != null" >
+        labels = #{labels},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+      <if test="submitedTime != null" >
+        submited_time = #{submitedTime},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="publishTime != null" >
+        publish_time = #{publishTime},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason},
+      </if>
+      <if test="articleId != null" >
+        article_id = #{articleId},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmNews" >
+
+    update wm_news
+    set user_id = #{userId},
+      title = #{title},
+      type = #{type},
+      channel_id = #{channelId},
+      labels = #{labels},
+      created_time = #{createdTime},
+      submited_time = #{submitedTime},
+      status = #{status,jdbcType=TINYINT},
+      publish_time = #{publishTime},
+      reason = #{reason},
+      article_id = #{articleId},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmNews" >
+
+    update wm_news
+    set user_id = #{userId},
+      title = #{title},
+      type = #{type},
+      channel_id = #{channelId},
+      labels = #{labels},
+      created_time = #{createdTime},
+      submited_time = #{submitedTime},
+      status = #{status,jdbcType=TINYINT},
+      publish_time = #{publishTime},
+      reason = #{reason},
+      article_id = #{articleId},
+      content = #{content},
+      images = #{images}
+    where id = #{id}
+  </update>
+
+  <insert id="insertNewsForEdit" useGeneratedKeys="true" keyProperty="id">
+      insert  into wm_news(
+        user_id, title, type, channel_id, labels, created_time, submited_time, status,
+        publish_time,content
+      )
+      values (
+        #{userId},#{title},#{type},#{channelId},#{labels},#{createdTime},
+        #{submitedTime},#{status},#{publishTime}, #{content}
+      )
+  </insert>
+
+  <select id="selectBySelective" resultType="com.heima.article.mysql.core.model.pojos.wemedia.WmNews">
+    select
+      <include refid="Base_Column_List"/>
+    from wm_news
+    <where>
+        user_id = #{uid}
+      <if test="dto.status != null and dto.status != -1" >
+        and status = #{dto.status}
+      </if>
+      <if test="dto.channelId != null" >
+        and channel_id = #{dto.channelId}
+      </if>
+      <if test="dto.keyWord != null" >
+        and title like concat('%', #{dto.keyWord}, '%')
+      </if>
+      <if test="dto.beginPubdate != null" >
+        and publish_time <![CDATA[>]]> #{dto.beginPubdate}
+      </if>
+      <if test="dto.endPubdate != null">
+        and publish_time <![CDATA[<]]> #{dto.endPubdate}
+      </if>
+    </where>
+    limit ${(dto.page - 1) * dto.size}, ${dto.size}
+  </select>
+  <select id="countSelectBySelective" resultType="java.lang.Integer">
+    select
+    count(1)
+    from wm_news
+    <where>
+      user_id = #{uid}
+      <if test="dto.status != null and dto.status != -1" >
+        and status = #{dto.status}
+      </if>
+      <if test="dto.channelId != null" >
+        and channel_id = #{dto.channelId}
+      </if>
+      <if test="dto.keyWord != null" >
+        and title like concat('%', #{dto.keyWord}, '%')
+      </if>
+      <if test="dto.beginPubdate != null" >
+        and publish_time <![CDATA[>]]> #{dto.beginPubdate}
+      </if>
+      <if test="dto.endPubdate != null">
+        and publish_time <![CDATA[<]]> #{dto.endPubdate}
+      </if>
+    </where>
+  </select>
+  <select id="selectNewsDetailByPrimaryKey" resultType="com.heima.article.mysql.core.model.pojos.wemedia.WmNews">
+        select <include refid="Base_Column_List"/>
+        from wm_news
+        where id = #{id}
+  </select>
+</mapper>

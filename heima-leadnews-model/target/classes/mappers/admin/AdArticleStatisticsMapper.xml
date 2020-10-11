@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.admin.AdArticleStatisticsMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.admin.AdArticleStatistics" >
+
+
+      <id column="id" />
+      <result column="article_we_media" />
+      <result column="article_crawlers" />
+      <result column="channel_id" />
+      <result column="read_20" />
+      <result column="read_100" />
+      <result column="read_count" />
+      <result column="comment" />
+      <result column="follow" />
+      <result column="collection" />
+      <result column="forward" />
+      <result column="likes" />
+      <result column="unlikes" />
+      <result column="unfollow" />
+      <result column="created_time" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, article_we_media, article_crawlers, channel_id, read_20, read_100, read_count, 
+    comment, follow, collection, forward, likes, unlikes, unfollow, created_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from ad_article_statistics
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from ad_article_statistics
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdArticleStatistics" >
+
+    insert into ad_article_statistics (id, article_we_media, article_crawlers, 
+      channel_id, read_20, read_100, 
+      read_count, comment, follow, 
+      collection, forward, likes, 
+      unlikes, unfollow, created_time
+      )
+    values (#{id}, #{articleWeMedia}, #{articleCrawlers},
+      #{channelId}, #{read20}, #{read100},
+      #{readCount}, #{comment}, #{follow},
+      #{collection}, #{forward}, #{likes},
+      #{unlikes}, #{unfollow}, #{createdTime}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdArticleStatistics" >
+
+    insert into ad_article_statistics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="articleWeMedia != null" >
+        article_we_media,
+      </if>
+      <if test="articleCrawlers != null" >
+        article_crawlers,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="read20 != null" >
+        read_20,
+      </if>
+      <if test="read100 != null" >
+        read_100,
+      </if>
+      <if test="readCount != null" >
+        read_count,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+      <if test="follow != null" >
+        follow,
+      </if>
+      <if test="collection != null" >
+        collection,
+      </if>
+      <if test="forward != null" >
+        forward,
+      </if>
+      <if test="likes != null" >
+        likes,
+      </if>
+      <if test="unlikes != null" >
+        unlikes,
+      </if>
+      <if test="unfollow != null" >
+        unfollow,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="articleWeMedia != null" >
+        #{articleWeMedia},
+      </if>
+      <if test="articleCrawlers != null" >
+        #{articleCrawlers},
+      </if>
+      <if test="channelId != null" >
+        #{channelId},
+      </if>
+      <if test="read20 != null" >
+        #{read20},
+      </if>
+      <if test="read100 != null" >
+        #{read100},
+      </if>
+      <if test="readCount != null" >
+        #{readCount},
+      </if>
+      <if test="comment != null" >
+        #{comment},
+      </if>
+      <if test="follow != null" >
+        #{follow},
+      </if>
+      <if test="collection != null" >
+        #{collection},
+      </if>
+      <if test="forward != null" >
+        #{forward},
+      </if>
+      <if test="likes != null" >
+        #{likes},
+      </if>
+      <if test="unlikes != null" >
+        #{unlikes},
+      </if>
+      <if test="unfollow != null" >
+        #{unfollow},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdArticleStatistics" >
+
+    update ad_article_statistics
+    <set >
+      <if test="articleWeMedia != null" >
+        article_we_media = #{articleWeMedia},
+      </if>
+      <if test="articleCrawlers != null" >
+        article_crawlers = #{articleCrawlers},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId},
+      </if>
+      <if test="read20 != null" >
+        read_20 = #{read20},
+      </if>
+      <if test="read100 != null" >
+        read_100 = #{read100},
+      </if>
+      <if test="readCount != null" >
+        read_count = #{readCount},
+      </if>
+      <if test="comment != null" >
+        comment = #{comment},
+      </if>
+      <if test="follow != null" >
+        follow = #{follow},
+      </if>
+      <if test="collection != null" >
+        collection = #{collection},
+      </if>
+      <if test="forward != null" >
+        forward = #{forward},
+      </if>
+      <if test="likes != null" >
+        likes = #{likes},
+      </if>
+      <if test="unlikes != null" >
+        unlikes = #{unlikes},
+      </if>
+      <if test="unfollow != null" >
+        unfollow = #{unfollow},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdArticleStatistics" >
+
+    update ad_article_statistics
+    set article_we_media = #{articleWeMedia},
+      article_crawlers = #{articleCrawlers},
+      channel_id = #{channelId},
+      read_20 = #{read20},
+      read_100 = #{read100},
+      read_count = #{readCount},
+      comment = #{comment},
+      follow = #{follow},
+      collection = #{collection},
+      forward = #{forward},
+      likes = #{likes},
+      unlikes = #{unlikes},
+      unfollow = #{unfollow},
+      created_time = #{createdTime}
+    where id = #{id}
+  </update>
+</mapper>

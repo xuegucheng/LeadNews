@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.app.ApHotArticlesMapper">
+
+    <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.app.ApHotArticles">
+        <id column="id" property="id"/>
+        <result column="entry_id" property="entryId"/>
+        <result column="tag_id" property="tagId"/>
+        <result column="tag_name" property="tagName"/>
+        <result column="score" property="score"/>
+        <result column="article_id" property="articleId"/>
+        <result column="release_date" property="releaseDate"/>
+        <result column="created_time" property="createdTime"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+    id, entry_id, tag_id, tag_name, score, article_id,release_date,created_time
+  </sql>
+
+    <sql id="Base_Column_Where">
+        <where>
+            <if test="entryId!=null and entryId!=''">
+                and entry_id = #{entryId}
+            </if>
+            <if test="tagId!=null and tagId!=''">
+                and tag_id = #{tagId}
+            </if>
+            <if test="tagName!=null and tagName!=''">
+                and tag_name = #{tagName}
+            </if>
+            <if test="score!=null and score!=''">
+                and score = #{score}
+            </if>
+            <if test="articleId!=null and articleId!=''">
+                and article_id = #{articleId}
+            </if>
+        </where>
+    </sql>
+
+
+    <select id="selectList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ap_hot_articles
+        <include refid="Base_Column_Where"/>
+    </select>
+
+
+    <select id="selectExpireMonth" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ap_hot_articles
+        <where>
+            where created_time > DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.app.ApHotArticles">
+        <!--
+          插入热文章数据
+        -->
+        insert into ap_hot_articles (id, entry_id, tag_id, tag_name,
+        score, article_id,release_date, created_time)
+        values (#{id,jdbcType=INTEGER}, #{entryId,jdbcType=INTEGER}, #{tagId,jdbcType=INTEGER},
+        #{tagName,jdbcType=VARCHAR},
+        #{score,jdbcType=INTEGER}, #{articleId,jdbcType=INTEGER},#{releaseDate,jdbcType=TIMESTAMP},
+        #{createdTime,jdbcType=TIMESTAMP})
+    </insert>
+    <!--
+    删除热文章数据
+  -->
+    <delete id="removeHotArticle" parameterType="java.lang.String">
+    delete from ap_hot_articles
+    where created_time &lt; #{removeDate}
+  </delete>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+         delete from ap_hot_articles where id= #{id}
+    </delete>
+
+    <!--
+      查询热文章数据
+    -->
+    <select id="loadArticleIdListByEntryId" resultMap="BaseResultMap">
+    select * from ap_hot_articles
+    where entry_id = #{entryId} and tag_id = #{dto.tag}
+    limit #{dto.size}
+  </select>
+</mapper>

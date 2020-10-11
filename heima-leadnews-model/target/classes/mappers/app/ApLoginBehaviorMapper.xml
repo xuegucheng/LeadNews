@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.app.ApLoginBehaviorMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.app.ApLoginBehavior" >
+
+
+      <id column="id" />
+      <result column="entry_id" />
+      <result column="equipment_id" />
+      <result column="address"/>
+      <result column="longitude" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <result column="latitude" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <result column="created_time" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, entry_id, equipment_id, address, longitude, latitude, created_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from ap_login_behavior
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from ap_login_behavior
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.app.ApLoginBehavior" >
+
+    insert into ap_login_behavior (id, entry_id, equipment_id, 
+      address, longitude, latitude, 
+      created_time)
+    values (#{id}, #{entryId}, #{equipmentId},
+      #{address}, #{longitude,jdbcType=DECIMAL}, #{latitude,jdbcType=DECIMAL},
+      #{createdTime})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.app.ApLoginBehavior" >
+
+    insert into ap_login_behavior
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="entryId != null" >
+        entry_id,
+      </if>
+      <if test="equipmentId != null" >
+        equipment_id,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="entryId != null" >
+        #{entryId},
+      </if>
+      <if test="equipmentId != null" >
+        #{equipmentId},
+      </if>
+      <if test="address != null" >
+        #{address},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.app.ApLoginBehavior" >
+
+    update ap_login_behavior
+    <set >
+      <if test="entryId != null" >
+        entry_id = #{entryId},
+      </if>
+      <if test="equipmentId != null" >
+        equipment_id = #{equipmentId},
+      </if>
+      <if test="address != null" >
+        address = #{address},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.app.ApLoginBehavior" >
+
+    update ap_login_behavior
+    set entry_id = #{entryId},
+      equipment_id = #{equipmentId},
+      address = #{address},
+      longitude = #{longitude,jdbcType=DECIMAL},
+      latitude = #{latitude,jdbcType=DECIMAL},
+      created_time = #{createdTime}
+    where id = #{id}
+  </update>
+</mapper>

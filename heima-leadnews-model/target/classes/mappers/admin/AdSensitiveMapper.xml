@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.admin.AdSensitiveMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.admin.AdSensitive" >
+
+
+      <id column="id" />
+      <result column="sensitives"/>
+      <result column="created_time" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, sensitives, created_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from ad_sensitive
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from ad_sensitive
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdSensitive" >
+
+    insert into ad_sensitive (id, sensitives, created_time
+      )
+    values (#{id}, #{sensitives}, #{createdTime}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdSensitive" >
+
+    insert into ad_sensitive
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sensitives != null" >
+        sensitives,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="sensitives != null" >
+        #{sensitives},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdSensitive" >
+
+    update ad_sensitive
+    <set >
+      <if test="sensitives != null" >
+        sensitives = #{sensitives},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdSensitive" >
+
+    update ad_sensitive
+    set sensitives = #{sensitives},
+      created_time = #{createdTime}
+    where id = #{id}
+  </update>
+</mapper>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.crawerls.ClTaskLogMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.crawerls.ClTaskLog" >
+
+
+      <id column="id" />
+      <result column="task_id" />
+      <result column="no" />
+      <result column="count" />
+      <result column="is_success"/>
+      <result column="start_time" />
+      <result column="end_time" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, task_id, no, count, is_success, start_time, end_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from cl_task_log
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from cl_task_log
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClTaskLog" >
+
+    insert into cl_task_log (id, task_id, no, 
+      count, is_success, start_time, 
+      end_time)
+    values (#{id}, #{taskId}, #{no},
+      #{count}, #{isSuccess}, #{startTime},
+      #{endTime})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClTaskLog" >
+
+    insert into cl_task_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="no != null" >
+        no,
+      </if>
+      <if test="count != null" >
+        count,
+      </if>
+      <if test="isSuccess != null" >
+        is_success,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="taskId != null" >
+        #{taskId},
+      </if>
+      <if test="no != null" >
+        #{no},
+      </if>
+      <if test="count != null" >
+        #{count},
+      </if>
+      <if test="isSuccess != null" >
+        #{isSuccess},
+      </if>
+      <if test="startTime != null" >
+        #{startTime},
+      </if>
+      <if test="endTime != null" >
+        #{endTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClTaskLog" >
+
+    update cl_task_log
+    <set >
+      <if test="taskId != null" >
+        task_id = #{taskId},
+      </if>
+      <if test="no != null" >
+        no = #{no},
+      </if>
+      <if test="count != null" >
+        count = #{count},
+      </if>
+      <if test="isSuccess != null" >
+        is_success = #{isSuccess},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClTaskLog" >
+
+    update cl_task_log
+    set task_id = #{taskId},
+      no = #{no},
+      count = #{count},
+      is_success = #{isSuccess},
+      start_time = #{startTime},
+      end_time = #{endTime}
+    where id = #{id}
+  </update>
+</mapper>

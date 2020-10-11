@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.wemedia.WmFansPortraitMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.wemedia.WmFansPortrait" >
+
+
+      <id column="id" />
+      <result column="user_id" />
+      <result column="name"/>
+      <result column="value"/>
+      <result column="created_time" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, user_id, name, value, created_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from wm_fans_portrait
+    where id = #{id}
+  </select>
+    <select id="selectByUserId" resultType="com.heima.article.mysql.core.model.pojos.wemedia.WmFansPortrait">
+      /*!mycat:sql=select id from wm_fans_portrait where burst='${burst}'*/
+      select <include refid="Base_Column_List"/>
+      from wm_fans_portrait
+      where user_id = #{userId}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from wm_fans_portrait
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmFansPortrait" >
+
+    insert into wm_fans_portrait (id, user_id, name, 
+      value, created_time)
+    values (#{id}, #{userId}, #{name},
+      #{value}, #{createdTime})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmFansPortrait" >
+
+    insert into wm_fans_portrait
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="value != null" >
+        value,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="userId != null" >
+        #{userId},
+      </if>
+      <if test="name != null" >
+        #{name},
+      </if>
+      <if test="value != null" >
+        #{value},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmFansPortrait" >
+
+    update wm_fans_portrait
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId},
+      </if>
+      <if test="name != null" >
+        name = #{name},
+      </if>
+      <if test="value != null" >
+        value = #{value},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmFansPortrait" >
+
+    update wm_fans_portrait
+    set user_id = #{userId},
+      name = #{name},
+      value = #{value},
+      created_time = #{createdTime}
+    where id = #{id}
+  </update>
+</mapper>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.admin.AdRoleAuthMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.admin.AdRoleAuth" >
+
+
+      <id column="id" />
+      <result column="role_id" />
+      <result column="type"/>
+      <result column="entry_id" />
+      <result column="created_time" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, role_id, type, entry_id, created_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from ad_role_auth
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from ad_role_auth
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdRoleAuth" >
+
+    insert into ad_role_auth (id, role_id, type, 
+      entry_id, created_time)
+    values (#{id}, #{roleId}, #{type},
+      #{entryId}, #{createdTime})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdRoleAuth" >
+
+    insert into ad_role_auth
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="entryId != null" >
+        entry_id,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="roleId != null" >
+        #{roleId},
+      </if>
+      <if test="type != null" >
+        #{type},
+      </if>
+      <if test="entryId != null" >
+        #{entryId},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdRoleAuth" >
+
+    update ad_role_auth
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId},
+      </if>
+      <if test="type != null" >
+        type = #{type},
+      </if>
+      <if test="entryId != null" >
+        entry_id = #{entryId},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdRoleAuth" >
+
+    update ad_role_auth
+    set role_id = #{roleId},
+      type = #{type},
+      entry_id = #{entryId},
+      created_time = #{createdTime}
+    where id = #{id}
+  </update>
+</mapper>

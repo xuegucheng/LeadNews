@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.app.ApDynamicMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.app.ApDynamic" >
+
+
+      <id column="id" />
+      <result column="user_id" />
+      <result column="user_name"/>
+      <result column="content"/>
+      <result column="is_forward"/>
+      <result column="article_id" />
+      <result column="articel_title"/>
+      <result column="article_image"/>
+      <result column="layout"/>
+      <result column="images"/>
+      <result column="likes" />
+      <result column="collection" />
+      <result column="comment" />
+      <result column="views" />
+      <result column="created_time" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, user_id, user_name, content, is_forward, article_id, articel_title, article_image, 
+    layout, images, likes, collection, comment, views, created_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from ap_dynamic
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from ap_dynamic
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.app.ApDynamic" >
+
+    insert into ap_dynamic (id, user_id, user_name, 
+      content, is_forward, article_id, 
+      articel_title, article_image, layout, 
+      images, likes, collection, 
+      comment, views, created_time
+      )
+    values (#{id}, #{userId}, #{userName},
+      #{content}, #{isForward}, #{articleId},
+      #{articelTitle}, #{articleImage}, #{layout},
+      #{images}, #{likes}, #{collection},
+      #{comment}, #{views}, #{createdTime}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.app.ApDynamic" >
+
+    insert into ap_dynamic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="isForward != null" >
+        is_forward,
+      </if>
+      <if test="articleId != null" >
+        article_id,
+      </if>
+      <if test="articelTitle != null" >
+        articel_title,
+      </if>
+      <if test="articleImage != null" >
+        article_image,
+      </if>
+      <if test="layout != null" >
+        layout,
+      </if>
+      <if test="images != null" >
+        images,
+      </if>
+      <if test="likes != null" >
+        likes,
+      </if>
+      <if test="collection != null" >
+        collection,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+      <if test="views != null" >
+        views,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="userId != null" >
+        #{userId},
+      </if>
+      <if test="userName != null" >
+        #{userName},
+      </if>
+      <if test="content != null" >
+        #{content},
+      </if>
+      <if test="isForward != null" >
+        #{isForward},
+      </if>
+      <if test="articleId != null" >
+        #{articleId},
+      </if>
+      <if test="articelTitle != null" >
+        #{articelTitle},
+      </if>
+      <if test="articleImage != null" >
+        #{articleImage},
+      </if>
+      <if test="layout != null" >
+        #{layout},
+      </if>
+      <if test="images != null" >
+        #{images},
+      </if>
+      <if test="likes != null" >
+        #{likes},
+      </if>
+      <if test="collection != null" >
+        #{collection},
+      </if>
+      <if test="comment != null" >
+        #{comment},
+      </if>
+      <if test="views != null" >
+        #{views},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.app.ApDynamic" >
+
+    update ap_dynamic
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName},
+      </if>
+      <if test="content != null" >
+        content = #{content},
+      </if>
+      <if test="isForward != null" >
+        is_forward = #{isForward},
+      </if>
+      <if test="articleId != null" >
+        article_id = #{articleId},
+      </if>
+      <if test="articelTitle != null" >
+        articel_title = #{articelTitle},
+      </if>
+      <if test="articleImage != null" >
+        article_image = #{articleImage},
+      </if>
+      <if test="layout != null" >
+        layout = #{layout},
+      </if>
+      <if test="images != null" >
+        images = #{images},
+      </if>
+      <if test="likes != null" >
+        likes = #{likes},
+      </if>
+      <if test="collection != null" >
+        collection = #{collection},
+      </if>
+      <if test="comment != null" >
+        comment = #{comment},
+      </if>
+      <if test="views != null" >
+        views = #{views},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.app.ApDynamic" >
+
+    update ap_dynamic
+    set user_id = #{userId},
+      user_name = #{userName},
+      content = #{content},
+      is_forward = #{isForward},
+      article_id = #{articleId},
+      articel_title = #{articelTitle},
+      article_image = #{articleImage},
+      layout = #{layout},
+      images = #{images},
+      likes = #{likes},
+      collection = #{collection},
+      comment = #{comment},
+      views = #{views},
+      created_time = #{createdTime}
+    where id = #{id}
+  </update>
+</mapper>

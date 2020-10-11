@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.crawerls.ClTaskMapper">
+    <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.crawerls.ClTask">
+
+
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="cron" property="cron"/>
+        <result column="bean_name" property="beanName"/>
+        <result column="method" property="method"/>
+        <result column="interval_time" property="intervalTime"/>
+        <result column="is_enable" property="isEnable"/>
+        <result column="last_time" property="lastTime"/>
+        <result column="created_time" property="createdTime"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_where">
+        <where>
+            <if test="name!=null and name!=''">
+                and name = #{name}
+            </if>
+            <if test="code!=null and code!=''">
+                and code = #{code}
+            </if>
+            <if test="cron!=null and cron!=''">
+                and cron = #{cron}
+            </if>
+            <if test="beanName!=null and beanName!=''">
+                and bean_name = #{beanName}
+            </if>
+            <if test="method!=null and method!=''">
+                and method = #{method}
+            </if>
+             and is_enable = true
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List">
+
+    id, name, code,cron,bean_name,method, interval_time, is_enable, last_time, created_time
+  </sql>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cl_task
+        <include refid="Base_Column_where"/>
+
+    </select>
+
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+
+        select
+        <include refid="Base_Column_List"/>
+        from cl_task
+        where id = #{id}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+
+    delete from cl_task
+    where id = #{id}
+  </delete>
+    <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClTask" useGeneratedKeys="true"
+            keyProperty="id">
+
+    insert into cl_task (id, name, code, cron,bean_name,method,
+      interval_time, is_enable, last_time, 
+      created_time)
+    values (#{id}, #{name}, #{code},#{cron},#{beanName},#{method},
+      #{intervalTime}, #{isEnable}, #{lastTime},
+      #{createdTime})
+  </insert>
+    <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClTask">
+
+        insert into cl_task
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="cron != null">
+                cron,
+            </if>
+            <if test="beanName != null">
+                bean_name,
+            </if>
+            <if test="method != null">
+                method,
+            </if>
+            <if test="intervalTime != null">
+                interval_time,
+            </if>
+            <if test="isEnable != null">
+                is_enable,
+            </if>
+            <if test="lastTime != null">
+                last_time,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="code != null">
+                #{code},
+            </if>
+            <if test="cron != null">
+                #{cron},
+            </if>
+            <if test="beanName != null">
+                #{bean_name},
+            </if>
+            <if test="method != null">
+                #{method},
+            </if>
+            <if test="intervalTime != null">
+                #{intervalTime},
+            </if>
+            <if test="isEnable != null">
+                #{isEnable},
+            </if>
+            <if test="lastTime != null">
+                #{lastTime},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClTask">
+
+        update cl_task
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="code != null">
+                code = #{code},
+            </if>
+            <if test="cron != null">
+                cron = #{cron},
+            </if>
+            <if test="beanName != null">
+                bean_name = #{beanName},
+            </if>
+            <if test="method != null">
+                method = #{method},
+            </if>
+            <if test="intervalTime != null">
+                interval_time = #{intervalTime},
+            </if>
+            <if test="isEnable != null">
+                is_enable = #{isEnable},
+            </if>
+            <if test="lastTime != null">
+                last_time = #{lastTime},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClTask">
+
+    update cl_task
+    set name = #{name},
+      code = #{code},
+      cron = #{cron},
+      bean_name = #{beanName},
+      method = #{method},
+      interval_time = #{intervalTime},
+      is_enable = #{isEnable},
+      last_time = #{lastTime},
+      created_time = #{createdTime}
+    where id = #{id}
+  </update>
+</mapper>

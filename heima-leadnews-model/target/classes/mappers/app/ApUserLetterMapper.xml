@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.app.ApUserLetterMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.app.ApUserLetter" >
+
+
+      <result column="id" />
+      <result column="user_id" />
+      <result column="sender_id" />
+      <result column="sender_name"/>
+      <result column="content"/>
+      <result column="is_read"/>
+      <result column="created_time" />
+      <result column="read_time" />
+
+  </resultMap>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.app.ApUserLetter" >
+
+    insert into ap_user_letter (id, user_id, sender_id, 
+      sender_name, content, is_read, 
+      created_time, read_time)
+    values (#{id}, #{userId}, #{senderId},
+      #{senderName}, #{content}, #{isRead},
+      #{createdTime}, #{readTime})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.app.ApUserLetter" >
+
+    insert into ap_user_letter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="senderId != null" >
+        sender_id,
+      </if>
+      <if test="senderName != null" >
+        sender_name,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="isRead != null" >
+        is_read,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+      <if test="readTime != null" >
+        read_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="userId != null" >
+        #{userId},
+      </if>
+      <if test="senderId != null" >
+        #{senderId},
+      </if>
+      <if test="senderName != null" >
+        #{senderName},
+      </if>
+      <if test="content != null" >
+        #{content},
+      </if>
+      <if test="isRead != null" >
+        #{isRead},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+      <if test="readTime != null" >
+        #{readTime},
+      </if>
+    </trim>
+  </insert>
+</mapper>

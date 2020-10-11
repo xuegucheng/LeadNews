@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.crawerls.ClMaterialMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.crawerls.ClMaterial" >
+
+
+      <id column="id" />
+      <result column="user_id" />
+      <result column="url"/>
+      <result column="type"/>
+      <result column="is_collection"/>
+      <result column="created_time" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, user_id, url, type, is_collection, created_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from cl_material
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from cl_material
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClMaterial" >
+
+    insert into cl_material (id, user_id, url, 
+      type, is_collection, created_time
+      )
+    values (#{id}, #{userId}, #{url},
+      #{type}, #{isCollection}, #{createdTime}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClMaterial" >
+
+    insert into cl_material
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="isCollection != null" >
+        is_collection,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="userId != null" >
+        #{userId},
+      </if>
+      <if test="url != null" >
+        #{url},
+      </if>
+      <if test="type != null" >
+        #{type},
+      </if>
+      <if test="isCollection != null" >
+        #{isCollection},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClMaterial" >
+
+    update cl_material
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId},
+      </if>
+      <if test="url != null" >
+        url = #{url},
+      </if>
+      <if test="type != null" >
+        type = #{type},
+      </if>
+      <if test="isCollection != null" >
+        is_collection = #{isCollection},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClMaterial" >
+
+    update cl_material
+    set user_id = #{userId},
+      url = #{url},
+      type = #{type},
+      is_collection = #{isCollection},
+      created_time = #{createdTime}
+    where id = #{id}
+  </update>
+</mapper>

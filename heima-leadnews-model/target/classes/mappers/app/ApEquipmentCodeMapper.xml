@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.app.ApEquipmentCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.app.ApEquipmentCode" >
+
+
+      <id column="id" />
+      <result column="equipment_id" />
+
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.heima.article.mysql.core.model.pojos.app.ApEquipmentCode" >
+
+
+      <id column="id" />
+      <result column="equipment_id" />
+      <result column="code" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, equipment_id
+  </sql>
+  <sql id="Blob_Column_List" >
+
+    code
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ap_equipment_code
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from ap_equipment_code
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.app.ApEquipmentCode" >
+
+    insert into ap_equipment_code (id, equipment_id, code
+      )
+    values (#{id}, #{equipmentId}, #{code,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.app.ApEquipmentCode" >
+
+    insert into ap_equipment_code
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="equipmentId != null" >
+        equipment_id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="equipmentId != null" >
+        #{equipmentId},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.app.ApEquipmentCode" >
+
+    update ap_equipment_code
+    <set >
+      <if test="equipmentId != null" >
+        equipment_id = #{equipmentId},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.heima.article.mysql.core.model.pojos.app.ApEquipmentCode" >
+
+    update ap_equipment_code
+    set equipment_id = #{equipmentId},
+      code = #{code,jdbcType=LONGVARCHAR}
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.app.ApEquipmentCode" >
+
+    update ap_equipment_code
+    set equipment_id = #{equipmentId}
+    where id = #{id}
+  </update>
+</mapper>

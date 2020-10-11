@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.admin.AdUserOpertionMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.admin.AdUserOpertion" >
+
+
+      <id column="id" />
+      <result column="user_id" />
+      <result column="equipment_id" />
+      <result column="ip"/>
+      <result column="address"/>
+      <result column="type" />
+      <result column="description"/>
+      <result column="created_time" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, user_id, equipment_id, ip, address, type, description, created_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from ad_user_opertion
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from ad_user_opertion
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdUserOpertion" >
+
+    insert into ad_user_opertion (id, user_id, equipment_id, 
+      ip, address, type, 
+      description, created_time)
+    values (#{id}, #{userId}, #{equipmentId},
+      #{ip}, #{address}, #{type},
+      #{description}, #{createdTime})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdUserOpertion" >
+
+    insert into ad_user_opertion
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="equipmentId != null" >
+        equipment_id,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="userId != null" >
+        #{userId},
+      </if>
+      <if test="equipmentId != null" >
+        #{equipmentId},
+      </if>
+      <if test="ip != null" >
+        #{ip},
+      </if>
+      <if test="address != null" >
+        #{address},
+      </if>
+      <if test="type != null" >
+        #{type},
+      </if>
+      <if test="description != null" >
+        #{description},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdUserOpertion" >
+
+    update ad_user_opertion
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId},
+      </if>
+      <if test="equipmentId != null" >
+        equipment_id = #{equipmentId},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip},
+      </if>
+      <if test="address != null" >
+        address = #{address},
+      </if>
+      <if test="type != null" >
+        type = #{type},
+      </if>
+      <if test="description != null" >
+        description = #{description},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdUserOpertion" >
+
+    update ad_user_opertion
+    set user_id = #{userId},
+      equipment_id = #{equipmentId},
+      ip = #{ip},
+      address = #{address},
+      type = #{type},
+      description = #{description},
+      created_time = #{createdTime}
+    where id = #{id}
+  </update>
+</mapper>

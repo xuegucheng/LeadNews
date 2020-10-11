@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.app.ApCollectionMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.app.ApCollection" >
+      <id column="id" property="id" />
+      <result column="behavior_entry_id" property="behaviorEntryId" />
+      <result column="entry_id" property="entryId" />
+      <result column="type" property="type"/>
+      <result column="collection_time" property="collectionTime"  />
+      <result column="published_time" property="publishedTime" />
+      <result column="burst" property="burst" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, behavior_entry_id, entry_id, type, collection_time, published_time
+  </sql>
+
+    <select id="selectForEntryId" resultMap="BaseResultMap">
+      /*!mycat:sql=select id from ap_collection where burst='${burst}'*/
+        select * from ap_collection where behavior_entry_id=#{objectId} and entry_id=#{entryId} and type=#{type}
+    </select>
+
+    <delete id="deleteById">
+        /*!mycat:sql=select id from ap_collection where burst='${burst}'*/
+        delete from ap_collection where id=#{id}
+    </delete>
+
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.app.ApCollection" >
+    insert into ap_collection (id, behavior_entry_id, entry_id, 
+      type, collection_time, published_time,burst
+      )
+    values (#{id}, #{behaviorEntryId}, #{entryId},
+      #{type}, #{collectionTime}, #{publishedTime},#{burst}
+      )
+  </insert>
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.app.ApForwardBehaviorMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.app.ApForwardBehavior" >
+      <id column="id" property="id" />
+      <result column="entry_id" property="entryId" />
+      <result column="article_id" property="articleId" />
+      <result column="dynamic_id" property="dynamicId" />
+      <result column="created_time" property="createdTime" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, entry_id, article_id, dynamic_id, created_time
+  </sql>
+  <select id="selectByApForwardBehavior" resultMap="BaseResultMap" parameterType="com.heima.article.mysql.core.model.pojos.app.ApForwardBehavior" >
+    select <include refid="Base_Column_List" /> from ap_forward_behavior where entry_id = #{entryId}
+    <if test="articleId!=null">
+        and article_id=#{articleId}
+    </if>
+    <if test="dynamicId!=null">
+        and dynamic_id=#{dynamicId}
+    </if>
+  </select>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.app.ApForwardBehavior" >
+    insert into ap_forward_behavior (entry_id, article_id, dynamic_id, created_time)
+    values (#{entryId}, #{articleId},  #{dynamicId}, #{createdTime})
+  </insert>
+</mapper>

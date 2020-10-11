@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.app.ApUserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.app.ApUserInfo" >
+
+
+      <id column="id" />
+      <result column="user_id" />
+      <result column="name"/>
+      <result column="idno"/>
+      <result column="company"/>
+      <result column="occupation"/>
+      <result column="age"/>
+      <result column="birthday" />
+      <result column="introduction"/>
+      <result column="location"/>
+      <result column="fans" />
+      <result column="follows" />
+      <result column="is_recommend_me"/>
+      <result column="is_recommend_friend"/>
+      <result column="is_display_image"/>
+      <result column="updated_time" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, user_id, name, idno, company, occupation, age, birthday, introduction, location, 
+    fans, follows, is_recommend_me, is_recommend_friend, is_display_image, updated_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from ap_user_info
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from ap_user_info
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.app.ApUserInfo" >
+
+    insert into ap_user_info (id, user_id, name, 
+      idno, company, occupation, 
+      age, birthday, introduction, 
+      location, fans, follows, 
+      is_recommend_me, is_recommend_friend, is_display_image, 
+      updated_time)
+    values (#{id}, #{userId}, #{name},
+      #{idno}, #{company}, #{occupation},
+      #{age,jdbcType=TINYINT}, #{birthday}, #{introduction},
+      #{location}, #{fans}, #{follows},
+      #{isRecommendMe}, #{isRecommendFriend}, #{isDisplayImage},
+      #{updatedTime})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.app.ApUserInfo" >
+
+    insert into ap_user_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="idno != null" >
+        idno,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="occupation != null" >
+        occupation,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+      <if test="fans != null" >
+        fans,
+      </if>
+      <if test="follows != null" >
+        follows,
+      </if>
+      <if test="isRecommendMe != null" >
+        is_recommend_me,
+      </if>
+      <if test="isRecommendFriend != null" >
+        is_recommend_friend,
+      </if>
+      <if test="isDisplayImage != null" >
+        is_display_image,
+      </if>
+      <if test="updatedTime != null" >
+        updated_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="userId != null" >
+        #{userId},
+      </if>
+      <if test="name != null" >
+        #{name},
+      </if>
+      <if test="idno != null" >
+        #{idno},
+      </if>
+      <if test="company != null" >
+        #{company},
+      </if>
+      <if test="occupation != null" >
+        #{occupation},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=TINYINT},
+      </if>
+      <if test="birthday != null" >
+        #{birthday},
+      </if>
+      <if test="introduction != null" >
+        #{introduction},
+      </if>
+      <if test="location != null" >
+        #{location},
+      </if>
+      <if test="fans != null" >
+        #{fans},
+      </if>
+      <if test="follows != null" >
+        #{follows},
+      </if>
+      <if test="isRecommendMe != null" >
+        #{isRecommendMe},
+      </if>
+      <if test="isRecommendFriend != null" >
+        #{isRecommendFriend},
+      </if>
+      <if test="isDisplayImage != null" >
+        #{isDisplayImage},
+      </if>
+      <if test="updatedTime != null" >
+        #{updatedTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.app.ApUserInfo" >
+
+    update ap_user_info
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId},
+      </if>
+      <if test="name != null" >
+        name = #{name},
+      </if>
+      <if test="idno != null" >
+        idno = #{idno},
+      </if>
+      <if test="company != null" >
+        company = #{company},
+      </if>
+      <if test="occupation != null" >
+        occupation = #{occupation},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=TINYINT},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction},
+      </if>
+      <if test="location != null" >
+        location = #{location},
+      </if>
+      <if test="fans != null" >
+        fans = #{fans},
+      </if>
+      <if test="follows != null" >
+        follows = #{follows},
+      </if>
+      <if test="isRecommendMe != null" >
+        is_recommend_me = #{isRecommendMe},
+      </if>
+      <if test="isRecommendFriend != null" >
+        is_recommend_friend = #{isRecommendFriend},
+      </if>
+      <if test="isDisplayImage != null" >
+        is_display_image = #{isDisplayImage},
+      </if>
+      <if test="updatedTime != null" >
+        updated_time = #{updatedTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.app.ApUserInfo" >
+
+    update ap_user_info
+    set user_id = #{userId},
+      name = #{name},
+      idno = #{idno},
+      company = #{company},
+      occupation = #{occupation},
+      age = #{age,jdbcType=TINYINT},
+      birthday = #{birthday},
+      introduction = #{introduction},
+      location = #{location},
+      fans = #{fans},
+      follows = #{follows},
+      is_recommend_me = #{isRecommendMe},
+      is_recommend_friend = #{isRecommendFriend},
+      is_display_image = #{isDisplayImage},
+      updated_time = #{updatedTime}
+    where id = #{id}
+  </update>
+</mapper>

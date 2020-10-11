@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.wemedia.WmFansStatisticsMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.wemedia.WmFansStatistics" >
+      <id column="id" property="id" />
+      <result column="user_id" property="userId" />
+      <result column="article" property="article" />
+      <result column="read_count" property="readCount" />
+      <result column="comment" property="comment" />
+      <result column="follow" property="follow" />
+      <result column="collection" property="collection" />
+      <result column="forward" property="forward" />
+      <result column="likes" property="likes" />
+      <result column="unlikes" property="unlikes" />
+      <result column="unfollow" property="unfollow" />
+      <result column="created_time" property="createdTime" />
+      <result column="burst" property="burst" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, article, read_count, comment, follow, collection, forward, likes, unlikes,
+    unfollow, created_time
+  </sql>
+  <select id="selectByUserId" resultType="com.heima.article.mysql.core.model.pojos.wemedia.WmFansStatistics">
+      /*!mycat:sql=select id from wm_news_statistics where burst='${burst}'*/
+      select <include refid="Base_Column_List"/>
+      from wm_news_statistics
+      where user_id = ${userId}
+  </select>
+    <select id="findByTimeAndUserId" resultType="com.heima.article.mysql.core.model.pojos.wemedia.WmFansStatistics">
+        /*!mycat:sql=select id from wm_fans_statistics where burst='${burst}'*/
+        select <include refid="Base_Column_List"/>
+        from wm_fans_statistics
+        <where>
+            user_id = #{userId}
+            <if test="dto.type == 0">
+                and date(created_time) = CURDATE()
+            </if>
+            <if test="dto.type != 0 and dto.stime != null">
+                and date(created_time) <![CDATA[ >= ]]> date(#{dto.stime})
+            </if>
+            <if test="dto.type != 0 and dto.etime != null">
+                and date(created_time) <![CDATA[ <= ]]> date(#{dto.etime})
+            </if>
+        </where>
+    </select>
+  <!-- 自媒体图文统计查询记录存在-->
+  <select id="selectWmFansStatisticsByUserIdAndTime" resultMap="BaseResultMap">
+      /*!mycat:sql=select id from wm_fans_statistics where burst='${burst}'*/
+      select * from wm_fans_statistics where user_id=#{userId} and created_time=#{createdTime} limit 1
+    </select>
+  <insert id="insertWmFansStatisticsByUserIdAndTime" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmFansStatistics" >
+    insert into wm_fans_statistics set
+    <trim prefix="" suffix="" suffixOverrides="," >
+      <if test="id != null" >
+        id=#{id},
+      </if>
+      <if test="userId != null" >
+        user_id=#{userId},
+      </if>
+      <if test="article != null" >
+        article=#{article},
+      </if>
+      <if test="readCount != null" >
+        read_count=#{readCount},
+      </if>
+      <if test="comment != null" >
+        comment=#{comment},
+      </if>
+      <if test="follow != null" >
+        follow=#{follow},
+      </if>
+      <if test="collection != null" >
+        collection=#{collection},
+      </if>
+      <if test="forward != null" >
+        forward=#{forward},
+      </if>
+      <if test="likes != null" >
+        likes=#{likes},
+      </if>
+      <if test="unlikes != null" >
+        unlikes=#{unlikes},
+      </if>
+      <if test="unfollow != null" >
+        unfollow=#{unfollow},
+      </if>
+      <if test="createdTime != null" >
+        created_time=#{createdTime},
+      </if>
+      <if test="burst != null" >
+        burst=#{burst},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateWmFansStatisticsByUserIdAndTime" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmFansStatistics" >
+    /*!mycat:sql=select id from wm_fans_statistics where burst='${burst}'*/
+    update wm_fans_statistics
+    <set>
+      <if test="article != null" >
+        article=#{article},
+      </if>
+      <if test="readCount != null" >
+        read_count=GREATEST(ifnull(read_count,0)+#{readCount},0),
+      </if>
+      <if test="comment != null" >
+        comment=GREATEST(ifnull(comment,0)+#{comment},0),
+      </if>
+      <if test="follow != null" >
+        follow=GREATEST(ifnull(follow,0)+#{follow},0),
+      </if>
+      <if test="collection != null" >
+        collection=GREATEST(ifnull(collection,0)+#{collection},0),
+      </if>
+      <if test="forward != null" >
+        forward=GREATEST(ifnull(forward,0)+#{forward},0),
+      </if>
+      <if test="likes != null" >
+        likes=GREATEST(ifnull(likes,0)+#{likes},0),
+      </if>
+      <if test="unlikes != null" >
+        unlikes=GREATEST(ifnull(unlikes,0)+#{unlikes},0),
+      </if>
+      <if test="unfollow != null" >
+        unfollow=GREATEST(ifnull(unfollow,0)+#{unfollow},0),
+      </if>
+    </set>
+    where user_id=#{userId} and created_time=#{createdTime}
+  </update>
+</mapper>

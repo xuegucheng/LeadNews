@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.app.ApUserRealnameMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.app.ApUserRealname" >
+
+
+      <id column="id" />
+      <result column="user_id" />
+      <result column="name"/>
+      <result column="idno"/>
+      <result column="font_image"/>
+      <result column="back_image"/>
+      <result column="hold_image"/>
+      <result column="live_image"/>
+      <result column="status"/>
+      <result column="reason"/>
+      <result column="created_time" />
+      <result column="submited_time" />
+      <result column="updated_time" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, user_id, name, idno, font_image, back_image, hold_image, live_image, status,
+    reason, created_time, submited_time, updated_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from ap_user_realname
+    where id = #{id}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from ap_user_realname
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.app.ApUserRealname" >
+
+    insert into ap_user_realname (id, user_id, name, 
+      idno, font_image, back_image, 
+      hold_image, live_image, status, 
+      reason, created_time, submited_time, 
+      updated_time)
+    values (#{id}, #{userId}, #{name},
+      #{idno}, #{fontImage}, #{backImage},
+      #{holdImage}, #{liveImage}, #{status},
+      #{reason}, #{createdTime}, #{submitedTime},
+      #{updatedTime})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.app.ApUserRealname" >
+
+    insert into ap_user_realname
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="idno != null" >
+        idno,
+      </if>
+      <if test="fontImage != null" >
+        font_image,
+      </if>
+      <if test="backImage != null" >
+        back_image,
+      </if>
+      <if test="holdImage != null" >
+        hold_image,
+      </if>
+      <if test="liveImage != null" >
+        live_image,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+      <if test="submitedTime != null" >
+        submited_time,
+      </if>
+      <if test="updatedTime != null" >
+        updated_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="userId != null" >
+        #{userId},
+      </if>
+      <if test="name != null" >
+        #{name},
+      </if>
+      <if test="idno != null" >
+        #{idno},
+      </if>
+      <if test="fontImage != null" >
+        #{fontImage},
+      </if>
+      <if test="backImage != null" >
+        #{backImage},
+      </if>
+      <if test="holdImage != null" >
+        #{holdImage},
+      </if>
+      <if test="liveImage != null" >
+        #{liveImage},
+      </if>
+      <if test="status != null" >
+        #{status},
+      </if>
+      <if test="reason != null" >
+        #{reason},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+      <if test="submitedTime != null" >
+        #{submitedTime},
+      </if>
+      <if test="updatedTime != null" >
+        #{updatedTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.app.ApUserRealname" >
+
+    update ap_user_realname
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId},
+      </if>
+      <if test="name != null" >
+        name = #{name},
+      </if>
+      <if test="idno != null" >
+        idno = #{idno},
+      </if>
+      <if test="fontImage != null" >
+        font_image = #{fontImage},
+      </if>
+      <if test="backImage != null" >
+        back_image = #{backImage},
+      </if>
+      <if test="holdImage != null" >
+        hold_image = #{holdImage},
+      </if>
+      <if test="liveImage != null" >
+        live_image = #{liveImage},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+      <if test="submitedTime != null" >
+        submited_time = #{submitedTime},
+      </if>
+      <if test="updatedTime != null" >
+        updated_time = #{updatedTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.app.ApUserRealname" >
+
+    update ap_user_realname
+    set user_id = #{userId},
+      name = #{name},
+      idno = #{idno},
+      font_image = #{fontImage},
+      back_image = #{backImage},
+      hold_image = #{holdImage},
+      live_image = #{liveImage},
+      status = #{status},
+      reason = #{reason},
+      created_time = #{createdTime},
+      submited_time = #{submitedTime},
+      updated_time = #{updatedTime}
+    where id = #{id}
+  </update>
+
+  <select id="loadListByStatusAndParam" resultType="com.heima.article.mysql.core.model.pojos.app.ApUserRealname">
+    select
+    <include refid="Base_Column_List" />
+    from ap_user_realname
+    <where>
+      <if test="status != null" >
+        and status = #{status}
+      </if>
+    </where>
+    limit ${(page - 1) * size}, ${size}
+  </select>
+  <select id="countAuthListByStatusAndParam" resultType="java.lang.Integer">
+    select
+    count(0)
+    from ap_user_realname
+    <where>
+      <if test="status != null" >
+        and status = #{status}
+      </if>
+    </where>
+  </select>
+</mapper>

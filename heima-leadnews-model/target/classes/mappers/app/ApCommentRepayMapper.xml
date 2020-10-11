@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.app.ApCommentRepayMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.app.ApCommentRepay" >
+
+
+      <id column="id" />
+      <result column="author_id" />
+      <result column="author_name"/>
+      <result column="comment_id" />
+      <result column="content"/>
+      <result column="likes" />
+      <result column="longitude" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <result column="latitude" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <result column="address"/>
+      <result column="created_time" />
+      <result column="updated_time" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, author_id, author_name, comment_id, content, likes, longitude, latitude, address, 
+    created_time, updated_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from ap_comment_repay
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from ap_comment_repay
+    where id = #{id}
+  </delete>
+    <delete id="deleteByCommentId">
+      delete from ap_comment_repay
+    where comment_id = #{cid}
+    </delete>
+    <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.app.ApCommentRepay" >
+
+    insert into ap_comment_repay (id, author_id, author_name, 
+      comment_id, content, likes, 
+      longitude, latitude, address, 
+      created_time, updated_time)
+    values (#{id}, #{authorId}, #{authorName},
+      #{commentId}, #{content}, #{likes},
+      #{longitude,jdbcType=DECIMAL}, #{latitude,jdbcType=DECIMAL}, #{address},
+      #{createdTime}, #{updatedTime})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.app.ApCommentRepay" >
+
+    insert into ap_comment_repay
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="authorId != null" >
+        author_id,
+      </if>
+      <if test="authorName != null" >
+        author_name,
+      </if>
+      <if test="commentId != null" >
+        comment_id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="likes != null" >
+        likes,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+      <if test="updatedTime != null" >
+        updated_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="authorId != null" >
+        #{authorId},
+      </if>
+      <if test="authorName != null" >
+        #{authorName},
+      </if>
+      <if test="commentId != null" >
+        #{commentId},
+      </if>
+      <if test="content != null" >
+        #{content},
+      </if>
+      <if test="likes != null" >
+        #{likes},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="address != null" >
+        #{address},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+      <if test="updatedTime != null" >
+        #{updatedTime},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertComment">
+
+    insert into ap_comment_repay (author_id, author_name,
+      comment_id, content, likes,
+      longitude, latitude, address,
+      created_time, updated_time)
+    values (#{authorId}, #{authorName},
+      #{commentId}, #{content}, #{likes},
+      #{longitude,jdbcType=DECIMAL}, #{latitude,jdbcType=DECIMAL}, #{address},
+      #{createdTime}, #{updatedTime})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.app.ApCommentRepay" >
+
+    update ap_comment_repay
+    <set >
+      <if test="authorId != null" >
+        author_id = #{authorId},
+      </if>
+      <if test="authorName != null" >
+        author_name = #{authorName},
+      </if>
+      <if test="commentId != null" >
+        comment_id = #{commentId},
+      </if>
+      <if test="content != null" >
+        content = #{content},
+      </if>
+      <if test="likes != null" >
+        likes = #{likes},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="address != null" >
+        address = #{address},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+      <if test="updatedTime != null" >
+        updated_time = #{updatedTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.app.ApCommentRepay" >
+
+    update ap_comment_repay
+    set author_id = #{authorId},
+      author_name = #{authorName},
+      comment_id = #{commentId},
+      content = #{content},
+      likes = #{likes},
+      longitude = #{longitude,jdbcType=DECIMAL},
+      latitude = #{latitude,jdbcType=DECIMAL},
+      address = #{address},
+      created_time = #{createdTime},
+      updated_time = #{updatedTime}
+    where id = #{id}
+  </update>
+</mapper>

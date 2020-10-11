@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.admin.AdVistorStatisticsMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.admin.AdVistorStatistics" >
+
+
+      <id column="id" />
+      <result column="activity" />
+      <result column="vistor" />
+      <result column="ip" />
+      <result column="register" />
+      <result column="created_time" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, activity, vistor, ip, register, created_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from ad_vistor_statistics
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from ad_vistor_statistics
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdVistorStatistics" >
+
+    insert into ad_vistor_statistics (id, activity, vistor, 
+      ip, register, created_time
+      )
+    values (#{id}, #{activity}, #{vistor},
+      #{ip}, #{register}, #{createdTime}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdVistorStatistics" >
+
+    insert into ad_vistor_statistics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="activity != null" >
+        activity,
+      </if>
+      <if test="vistor != null" >
+        vistor,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="register != null" >
+        register,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="activity != null" >
+        #{activity},
+      </if>
+      <if test="vistor != null" >
+        #{vistor},
+      </if>
+      <if test="ip != null" >
+        #{ip},
+      </if>
+      <if test="register != null" >
+        #{register},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdVistorStatistics" >
+
+    update ad_vistor_statistics
+    <set >
+      <if test="activity != null" >
+        activity = #{activity},
+      </if>
+      <if test="vistor != null" >
+        vistor = #{vistor},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip},
+      </if>
+      <if test="register != null" >
+        register = #{register},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdVistorStatistics" >
+
+    update ad_vistor_statistics
+    set activity = #{activity},
+      vistor = #{vistor},
+      ip = #{ip},
+      register = #{register},
+      created_time = #{createdTime}
+    where id = #{id}
+  </update>
+</mapper>

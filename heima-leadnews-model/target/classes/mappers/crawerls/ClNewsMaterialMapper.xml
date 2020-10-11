@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.crawerls.ClNewsMaterialMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.crawerls.ClNewsMaterial" >
+
+
+      <id column="id" />
+      <result column="material_id" />
+      <result column="news_id" />
+      <result column="type"/>
+      <result column="ord"/>
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, material_id, news_id, type, ord
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from cl_news_material
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from cl_news_material
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClNewsMaterial" >
+
+    insert into cl_news_material (id, material_id, news_id, 
+      type, ord)
+    values (#{id}, #{materialId}, #{newsId},
+      #{type}, #{ord})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClNewsMaterial" >
+
+    insert into cl_news_material
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="materialId != null" >
+        material_id,
+      </if>
+      <if test="newsId != null" >
+        news_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="ord != null" >
+        ord,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="materialId != null" >
+        #{materialId},
+      </if>
+      <if test="newsId != null" >
+        #{newsId},
+      </if>
+      <if test="type != null" >
+        #{type},
+      </if>
+      <if test="ord != null" >
+        #{ord},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClNewsMaterial" >
+
+    update cl_news_material
+    <set >
+      <if test="materialId != null" >
+        material_id = #{materialId},
+      </if>
+      <if test="newsId != null" >
+        news_id = #{newsId},
+      </if>
+      <if test="type != null" >
+        type = #{type},
+      </if>
+      <if test="ord != null" >
+        ord = #{ord},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClNewsMaterial" >
+
+    update cl_news_material
+    set material_id = #{materialId},
+      news_id = #{newsId},
+      type = #{type},
+      ord = #{ord}
+    where id = #{id}
+  </update>
+</mapper>

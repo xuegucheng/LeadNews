@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.app.ApAuthorMapper">
+    <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.app.ApAuthor">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="type" property="type"/>
+        <result column="user_id" property="userId"/>
+        <result column="wm_user_id" property="wmUserId"/>
+        <result column="created_time" property="createdTime"/>
+
+    </resultMap>
+
+    <sql id="BASE_COLUMN">
+    id, name, type, user_id,wm_user_id, created_time
+  </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+    select * from ap_author where id=#{id}
+  </select>
+
+
+    <select id="selectByIds" resultMap="BaseResultMap">
+        select * from ap_author
+        where id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+    </select>
+
+
+    <select id="findByApUserId" resultType="com.heima.article.mysql.core.model.pojos.app.ApAuthor">
+        select
+        <include refid="BASE_COLUMN"/>
+        from ap_author
+        where user_id = #{apUserId}
+    </select>
+
+
+    <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.app.ApAuthor">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyColumn="id" keyProperty="id">
+            select last_insert_id()
+        </selectKey>
+        insert into ap_author (name, type, user_id, wm_user_id,
+        created_time)
+        values (#{name}, #{type}, #{userId},#{wmUserId}, #{createdTime})
+    </insert>
+
+    <select id="selectByAuthorName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from ap_author where name=#{authorName}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.app.ApAuthor">
+
+        insert into ap_author
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="wmUserId != null">
+                wmUserId,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="type != null">
+                #{type},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="wmUserId != null">
+                #{wmUserId},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime},
+            </if>
+        </trim>
+    </insert>
+    <insert id="insert4Auth" useGeneratedKeys="true" keyProperty="id">
+    insert into ap_author (name, type, user_id,wm_user_id,
+      created_time)
+    values ( #{name}, #{type}, #{userId},#{wmUserId}
+      #{createdTime})
+  </insert>
+</mapper>

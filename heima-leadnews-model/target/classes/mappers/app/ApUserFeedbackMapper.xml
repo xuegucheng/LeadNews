@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.app.ApUserFeedbackMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.app.ApUserFeedback" >
+
+
+      <result column="id" />
+      <result column="user_id" />
+      <result column="user_name"/>
+      <result column="content"/>
+      <result column="images"/>
+      <result column="is_solve"/>
+      <result column="solve_note"/>
+      <result column="solved_time" />
+      <result column="created_time" />
+
+  </resultMap>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.app.ApUserFeedback" >
+
+    insert into ap_user_feedback (id, user_id, user_name, 
+      content, images, is_solve, 
+      solve_note, solved_time, created_time
+      )
+    values (#{id}, #{userId}, #{userName},
+      #{content}, #{images}, #{isSolve},
+      #{solveNote}, #{solvedTime}, #{createdTime}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.app.ApUserFeedback" >
+
+    insert into ap_user_feedback
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="images != null" >
+        images,
+      </if>
+      <if test="isSolve != null" >
+        is_solve,
+      </if>
+      <if test="solveNote != null" >
+        solve_note,
+      </if>
+      <if test="solvedTime != null" >
+        solved_time,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="userId != null" >
+        #{userId},
+      </if>
+      <if test="userName != null" >
+        #{userName},
+      </if>
+      <if test="content != null" >
+        #{content},
+      </if>
+      <if test="images != null" >
+        #{images},
+      </if>
+      <if test="isSolve != null" >
+        #{isSolve},
+      </if>
+      <if test="solveNote != null" >
+        #{solveNote},
+      </if>
+      <if test="solvedTime != null" >
+        #{solvedTime},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+    </trim>
+  </insert>
+</mapper>

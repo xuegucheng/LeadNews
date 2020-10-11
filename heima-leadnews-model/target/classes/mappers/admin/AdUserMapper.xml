@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.admin.AdUserMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.admin.AdUser" >
+
+
+      <id column="id" />
+      <result column="name"/>
+      <result column="password"/>
+      <result column="salt"/>
+      <result column="nickname"/>
+      <result column="image"/>
+      <result column="phone"/>
+      <result column="status"/>
+      <result column="email"/>
+      <result column="login_time" />
+      <result column="created_time" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, name, password, salt, nickname, image, phone, status, email, login_time, created_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from ad_user
+    where id = #{id}
+  </select>
+    <select id="selectByName" resultType="com.heima.article.mysql.core.model.pojos.admin.AdUser">
+      select <include refid="Base_Column_List" />
+      from ad_user where name = #{name} limit 1
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from ad_user
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdUser" >
+
+    insert into ad_user (id, name, password, 
+      salt, nickname, image, 
+      phone, status, email, 
+      login_time, created_time)
+    values (#{id}, #{name}, #{password},
+      #{salt}, #{nickname}, #{image},
+      #{phone}, #{status,jdbcType=TINYINT}, #{email},
+      #{loginTime}, #{createdTime})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdUser" >
+
+    insert into ad_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="salt != null" >
+        salt,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="loginTime != null" >
+        login_time,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="name != null" >
+        #{name},
+      </if>
+      <if test="password != null" >
+        #{password},
+      </if>
+      <if test="salt != null" >
+        #{salt},
+      </if>
+      <if test="nickname != null" >
+        #{nickname},
+      </if>
+      <if test="image != null" >
+        #{image},
+      </if>
+      <if test="phone != null" >
+        #{phone},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="email != null" >
+        #{email},
+      </if>
+      <if test="loginTime != null" >
+        #{loginTime},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdUser" >
+
+    update ad_user
+    <set >
+      <if test="name != null" >
+        name = #{name},
+      </if>
+      <if test="password != null" >
+        password = #{password},
+      </if>
+      <if test="salt != null" >
+        salt = #{salt},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname},
+      </if>
+      <if test="image != null" >
+        image = #{image},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="email != null" >
+        email = #{email},
+      </if>
+      <if test="loginTime != null" >
+        login_time = #{loginTime},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.admin.AdUser" >
+
+    update ad_user
+    set name = #{name},
+      password = #{password},
+      salt = #{salt},
+      nickname = #{nickname},
+      image = #{image},
+      phone = #{phone},
+      status = #{status,jdbcType=TINYINT},
+      email = #{email},
+      login_time = #{loginTime},
+      created_time = #{createdTime}
+    where id = #{id}
+  </update>
+</mapper>

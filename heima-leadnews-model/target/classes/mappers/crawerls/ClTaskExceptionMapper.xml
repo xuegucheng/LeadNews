@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.crawerls.ClTaskExceptionMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.crawerls.ClTaskException" >
+
+
+      <id column="id" />
+      <result column="task_id" />
+      <result column="no" />
+      <result column="url"/>
+      <result column="type"/>
+      <result column="created_time" />
+
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.heima.article.mysql.core.model.pojos.crawerls.ClTaskException" >
+
+
+      <id column="id" />
+      <result column="task_id" />
+      <result column="no" />
+      <result column="url"/>
+      <result column="type"/>
+      <result column="created_time" />
+      <result column="content" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, task_id, no, url, type, created_time
+  </sql>
+  <sql id="Blob_Column_List" >
+
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cl_task_exception
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from cl_task_exception
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClTaskException" >
+
+    insert into cl_task_exception (id, task_id, no, 
+      url, type, created_time, 
+      content)
+    values (#{id}, #{taskId}, #{no},
+      #{url}, #{type}, #{createdTime},
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClTaskException" >
+
+    insert into cl_task_exception
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="no != null" >
+        no,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="taskId != null" >
+        #{taskId},
+      </if>
+      <if test="no != null" >
+        #{no},
+      </if>
+      <if test="url != null" >
+        #{url},
+      </if>
+      <if test="type != null" >
+        #{type},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClTaskException" >
+
+    update cl_task_exception
+    <set >
+      <if test="taskId != null" >
+        task_id = #{taskId},
+      </if>
+      <if test="no != null" >
+        no = #{no},
+      </if>
+      <if test="url != null" >
+        url = #{url},
+      </if>
+      <if test="type != null" >
+        type = #{type},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClTaskException" >
+
+    update cl_task_exception
+    set task_id = #{taskId},
+      no = #{no},
+      url = #{url},
+      type = #{type},
+      created_time = #{createdTime},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.crawerls.ClTaskException" >
+
+    update cl_task_exception
+    set task_id = #{taskId},
+      no = #{no},
+      url = #{url},
+      type = #{type},
+      created_time = #{createdTime}
+    where id = #{id}
+  </update>
+</mapper>

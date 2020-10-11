@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.wemedia.WmUserLoginMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.wemedia.WmUserLogin" >
+
+
+      <id column="id" />
+      <result column="user_id" />
+      <result column="equipment_id" />
+      <result column="ip"/>
+      <result column="address"/>
+      <result column="longitude" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <result column="latitude" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <result column="created_time" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, user_id, equipment_id, ip, address, longitude, latitude, created_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from wm_user_login
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from wm_user_login
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmUserLogin" >
+
+    insert into wm_user_login (id, user_id, equipment_id, 
+      ip, address, longitude, 
+      latitude, created_time)
+    values (#{id}, #{userId}, #{equipmentId},
+      #{ip}, #{address}, #{longitude,jdbcType=DECIMAL},
+      #{latitude,jdbcType=DECIMAL}, #{createdTime})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmUserLogin" >
+
+    insert into wm_user_login
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="equipmentId != null" >
+        equipment_id,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="userId != null" >
+        #{userId},
+      </if>
+      <if test="equipmentId != null" >
+        #{equipmentId},
+      </if>
+      <if test="ip != null" >
+        #{ip},
+      </if>
+      <if test="address != null" >
+        #{address},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmUserLogin" >
+
+    update wm_user_login
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId},
+      </if>
+      <if test="equipmentId != null" >
+        equipment_id = #{equipmentId},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip},
+      </if>
+      <if test="address != null" >
+        address = #{address},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmUserLogin" >
+
+    update wm_user_login
+    set user_id = #{userId},
+      equipment_id = #{equipmentId},
+      ip = #{ip},
+      address = #{address},
+      longitude = #{longitude,jdbcType=DECIMAL},
+      latitude = #{latitude,jdbcType=DECIMAL},
+      created_time = #{createdTime}
+    where id = #{id}
+  </update>
+</mapper>

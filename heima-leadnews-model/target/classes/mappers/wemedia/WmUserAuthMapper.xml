@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.wemedia.WmUserAuthMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.wemedia.WmUserAuth" >
+
+
+      <id column="id" />
+      <result column="user_id" />
+      <result column="type"/>
+      <result column="name"/>
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, user_id, type, name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from wm_user_auth
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from wm_user_auth
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmUserAuth" >
+
+    insert into wm_user_auth (id, user_id, type, 
+      name)
+    values (#{id}, #{userId}, #{type},
+      #{name})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmUserAuth" >
+
+    insert into wm_user_auth
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="userId != null" >
+        #{userId},
+      </if>
+      <if test="type != null" >
+        #{type},
+      </if>
+      <if test="name != null" >
+        #{name},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmUserAuth" >
+
+    update wm_user_auth
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId},
+      </if>
+      <if test="type != null" >
+        type = #{type},
+      </if>
+      <if test="name != null" >
+        name = #{name},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.wemedia.WmUserAuth" >
+
+    update wm_user_auth
+    set user_id = #{userId},
+      type = #{type},
+      name = #{name}
+    where id = #{id}
+  </update>
+</mapper>

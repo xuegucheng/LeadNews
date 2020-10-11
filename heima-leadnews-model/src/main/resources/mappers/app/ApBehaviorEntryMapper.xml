@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heima.model.mappers.app.ApBehaviorEntryMapper">
+    <resultMap id="BaseResultMap" type="com.heima.model.behavior.pojos.ApBehaviorEntry" >
+        <id column="id" property="id" />
+        <result column="type" property="type"/>
+        <result column="entry_id" property="entryId" />
+        <result column="created_time" property="createdTime" />
+        <result column="burst" property="burst"/>
+    </resultMap>
+    <sql id="Base_Column_List" >
+    id, type, entry_id, created_time
+  </sql>
+
+    <select id="selectByUserIdOrEquipemntId" resultMap="BaseResultMap">
+        select * from ap_behavior_entry a
+        <where>
+            <if test="userId!=null">
+                and a.type = 1 and entry_id=#{userId}
+            </if>
+
+            <if test="equipmentId!=null">
+                and a.type = 0 and entry_id=#{equipmentId}
+            </if>
+        </where>
+        limit 1
+    </select>
+
+</mapper>

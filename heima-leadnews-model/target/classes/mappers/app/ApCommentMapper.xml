@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.app.ApCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.app.ApComment" >
+
+
+      <id column="id" />
+      <result column="author_id" />
+      <result column="author_name"/>
+      <result column="entry_id" />
+      <result column="channel_id" />
+      <result column="type"/>
+      <result column="content"/>
+      <result column="image"/>
+      <result column="likes" />
+      <result column="reply" />
+      <result column="flag"/>
+      <result column="longitude" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <result column="latitude" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <result column="address"/>
+      <result column="ord" />
+      <result column="created_time" />
+      <result column="updated_time" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, author_id, author_name, entry_id, channel_id, type, content, image, likes, reply, 
+    flag, longitude, latitude, address, ord, created_time, updated_time
+  </sql>
+  <select id="selectByPrimaryKey" resultType="com.heima.article.mysql.core.model.pojos.app.ApComment" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from ap_comment
+    where id = #{id}
+  </select>
+    <select id="findByUserId" resultType="com.heima.article.mysql.core.model.pojos.app.ApComment">
+      select <include refid="Base_Column_List"/>
+      from ap_comment
+      where author_id = #{apuid}
+    </select>
+    <select id="findCommentByArticleIds" resultType="com.heima.article.mysql.core.model.pojos.app.ApComment">
+      select <include refid="Base_Column_List"/>
+      from ap_comment
+      where entry_id in
+      <foreach item="item" index="index" collection="list"
+               open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from ap_comment
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.app.ApComment" >
+
+    insert into ap_comment (id, author_id, author_name, 
+      entry_id, channel_id, type, 
+      content, image, likes, 
+      reply, flag, longitude, 
+      latitude, address, ord, 
+      created_time, updated_time)
+    values (#{id}, #{authorId}, #{authorName},
+      #{entryId}, #{channelId}, #{type},
+      #{content}, #{image}, #{likes},
+      #{reply}, #{flag,jdbcType=TINYINT}, #{longitude,jdbcType=DECIMAL},
+      #{latitude,jdbcType=DECIMAL}, #{address}, #{ord},
+      #{createdTime}, #{updatedTime})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.app.ApComment" >
+
+    insert into ap_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="authorId != null" >
+        author_id,
+      </if>
+      <if test="authorName != null" >
+        author_name,
+      </if>
+      <if test="entryId != null" >
+        entry_id,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="likes != null" >
+        likes,
+      </if>
+      <if test="reply != null" >
+        reply,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="ord != null" >
+        ord,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+      <if test="updatedTime != null" >
+        updated_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="authorId != null" >
+        #{authorId},
+      </if>
+      <if test="authorName != null" >
+        #{authorName},
+      </if>
+      <if test="entryId != null" >
+        #{entryId},
+      </if>
+      <if test="channelId != null" >
+        #{channelId},
+      </if>
+      <if test="type != null" >
+        #{type},
+      </if>
+      <if test="content != null" >
+        #{content},
+      </if>
+      <if test="image != null" >
+        #{image},
+      </if>
+      <if test="likes != null" >
+        #{likes},
+      </if>
+      <if test="reply != null" >
+        #{reply},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="address != null" >
+        #{address},
+      </if>
+      <if test="ord != null" >
+        #{ord},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+      <if test="updatedTime != null" >
+        #{updatedTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.app.ApComment" >
+
+    update ap_comment
+    <set >
+      <if test="authorId != null" >
+        author_id = #{authorId},
+      </if>
+      <if test="authorName != null" >
+        author_name = #{authorName},
+      </if>
+      <if test="entryId != null" >
+        entry_id = #{entryId},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId},
+      </if>
+      <if test="type != null" >
+        type = #{type},
+      </if>
+      <if test="content != null" >
+        content = #{content},
+      </if>
+      <if test="image != null" >
+        image = #{image},
+      </if>
+      <if test="likes != null" >
+        likes = #{likes},
+      </if>
+      <if test="reply != null" >
+        reply = #{reply},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="address != null" >
+        address = #{address},
+      </if>
+      <if test="ord != null" >
+        ord = #{ord},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+      <if test="updatedTime != null" >
+        updated_time = #{updatedTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.app.ApComment" >
+
+    update ap_comment
+    set author_id = #{authorId},
+      author_name = #{authorName},
+      entry_id = #{entryId},
+      channel_id = #{channelId},
+      type = #{type},
+      content = #{content},
+      image = #{image},
+      likes = #{likes},
+      reply = #{reply},
+      flag = #{flag,jdbcType=TINYINT},
+      longitude = #{longitude,jdbcType=DECIMAL},
+      latitude = #{latitude,jdbcType=DECIMAL},
+      address = #{address},
+      ord = #{ord},
+      created_time = #{createdTime},
+      updated_time = #{updatedTime}
+    where id = #{id}
+  </update>
+</mapper>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mysql.core.model.mappers.app.ApUserIdentityMapper" >
+  <resultMap id="BaseResultMap" type="com.heima.article.mysql.core.model.pojos.app.ApUserIdentity" >
+
+
+      <id column="id" property="id"/>
+      <result column="user_id" property="userId"/>
+      <result column="name" property="name"/>
+      <result column="idno" property="idno"/>
+      <result column="font_image" property="fontImage"/>
+      <result column="back_image" property="backImage"/>
+      <result column="hold_image" property="holdImage"/>
+      <result column="industry" property="industry"/>
+      <result column="status" property="status"/>
+      <result column="reason" property="reason"/>
+      <result column="created_time" property="createdTime"/>
+      <result column="submited_time" property="submitedTime"/>
+      <result column="updated_time" property="updatedTime"/>
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, user_id, name, idno, font_image, back_image, hold_image, industry, status, reason, 
+    created_time, submited_time, updated_time
+  </sql>
+  <!--根据用户id和状态查询认证信息-->
+  <select id="findbyUserIdAndStatus" resultMap="BaseResultMap" parameterType="com.heima.article.mysql.core.model.pojos.app.ApUserIdentity">
+    select
+    <include refid="Base_Column_List" />
+    from ap_user_identity where id=#{id} and status=#{status}
+
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" /> from ap_user_identity
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from ap_user_identity
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from ap_user_identity
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.heima.article.mysql.core.model.pojos.app.ApUserIdentity" >
+
+    insert into ap_user_identity (id, user_id, name, 
+      idno, font_image, back_image, 
+      hold_image, industry, status, 
+      reason, created_time, submited_time, 
+      updated_time)
+    values (#{id}, #{userId}, #{name},
+      #{idno}, #{fontImage}, #{backImage},
+      #{holdImage}, #{industry}, #{status},
+      #{reason}, #{createdTime}, #{submitedTime},
+      #{updatedTime})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heima.article.mysql.core.model.pojos.app.ApUserIdentity" >
+
+    insert into ap_user_identity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="idno != null" >
+        idno,
+      </if>
+      <if test="fontImage != null" >
+        font_image,
+      </if>
+      <if test="backImage != null" >
+        back_image,
+      </if>
+      <if test="holdImage != null" >
+        hold_image,
+      </if>
+      <if test="industry != null" >
+        industry,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+      <if test="submitedTime != null" >
+        submited_time,
+      </if>
+      <if test="updatedTime != null" >
+        updated_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="userId != null" >
+        #{userId},
+      </if>
+      <if test="name != null" >
+        #{name},
+      </if>
+      <if test="idno != null" >
+        #{idno},
+      </if>
+      <if test="fontImage != null" >
+        #{fontImage},
+      </if>
+      <if test="backImage != null" >
+        #{backImage},
+      </if>
+      <if test="holdImage != null" >
+        #{holdImage},
+      </if>
+      <if test="industry != null" >
+        #{industry},
+      </if>
+      <if test="status != null" >
+        #{status},
+      </if>
+      <if test="reason != null" >
+        #{reason},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+      <if test="submitedTime != null" >
+        #{submitedTime},
+      </if>
+      <if test="updatedTime != null" >
+        #{updatedTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heima.article.mysql.core.model.pojos.app.ApUserIdentity" >
+
+    update ap_user_identity
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId},
+      </if>
+      <if test="name != null" >
+        name = #{name},
+      </if>
+      <if test="idno != null" >
+        idno = #{idno},
+      </if>
+      <if test="fontImage != null" >
+        font_image = #{fontImage},
+      </if>
+      <if test="backImage != null" >
+        back_image = #{backImage},
+      </if>
+      <if test="holdImage != null" >
+        hold_image = #{holdImage},
+      </if>
+      <if test="industry != null" >
+        industry = #{industry},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+      <if test="submitedTime != null" >
+        submited_time = #{submitedTime},
+      </if>
+      <if test="updatedTime != null" >
+        updated_time = #{updatedTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heima.article.mysql.core.model.pojos.app.ApUserIdentity" >
+
+    update ap_user_identity
+    set user_id = #{userId},
+      name = #{name},
+      idno = #{idno},
+      font_image = #{fontImage},
+      back_image = #{backImage},
+      hold_image = #{holdImage},
+      industry = #{industry},
+      status = #{status},
+      reason = #{reason},
+      created_time = #{createdTime},
+      submited_time = #{submitedTime},
+      updated_time = #{updatedTime}
+    where id = #{id}
+  </update>
+</mapper>
