@@ -9,6 +9,9 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.*;
 
+/**
+ * jwt字符串生成验证工具类
+ */
 public class AppJwtUtil {
 
     // TOKEN的有效期一天（S）

@@ -3,6 +3,9 @@ package com.heima.utils.threadlocal;
 
 import com.heima.model.user.pojos.ApUser;
 
+/**
+ * 当前请求用户信息操作类
+ */
 public class AppThreadLocalUtils {
 
     private final  static ThreadLocal<ApUser> userThreadLocal = new ThreadLocal<>();

@@ -8,6 +8,9 @@ import org.springframework.util.StringUtils;
 import java.util.Map;
 import java.util.SortedMap;
 
+/**
+ * url签名工具类
+ */
 public enum UrlSignUtils {
 
     getUrlSignUtils;
@@ -21,8 +24,9 @@ public enum UrlSignUtils {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry entry : params.entrySet()) {
             if (!entry.getKey().equals("sign")) { //拼装参数,排除sign
-                if (!StringUtils.isEmpty(entry.getKey()) && !StringUtils.isEmpty(entry.getValue()))
+                if (!StringUtils.isEmpty(entry.getKey()) && !StringUtils.isEmpty(entry.getValue())) {
                     sb.append(entry.getKey()).append('=').append(entry.getValue());
+                }
             }
         }
         logger.info("Before Sign : {}", sb.toString());
@@ -34,7 +38,9 @@ public enum UrlSignUtils {
      * @return 验证签名结果
      */
     public boolean verifySign(SortedMap<String, String> params) {
-        if (params == null || StringUtils.isEmpty(params.get("sign"))) return false;
+        if (params == null || StringUtils.isEmpty(params.get("sign"))) {
+            return false;
+        }
         String sign = getSign(params);
         logger.info("verify Sign : {}", sign);
         return !StringUtils.isEmpty(sign) && params.get("sign").equals(sign);

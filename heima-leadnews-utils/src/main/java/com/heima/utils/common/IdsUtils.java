@@ -6,6 +6,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 /**
  * 数字ID混淆器，用于前后端数据通信时候的处理
+ * 把数字类型的id做aes加密混淆，比如：在url传递的过程中，自增的id会做混淆处理
  */
 public class IdsUtils {
 
