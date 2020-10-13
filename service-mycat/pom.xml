@@ -11,5 +11,14 @@
 
     <artifactId>service-mycat</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.mycat</groupId>
+            <artifactId>mycat-server</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/libs/Mycat-server-1.6-release.jar</systemPath>
+        </dependency>
+    </dependencies>
 
 </project>

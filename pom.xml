@@ -13,6 +13,7 @@
         <module>heima-leadnews-utils</module>
         <module>heima-leadnews-apis</module>
         <module>heima-leadnews-model</module>
+        <module>service-mycat</module>
     </modules>
 
     <!-- 继承Spring boot工程 -->
